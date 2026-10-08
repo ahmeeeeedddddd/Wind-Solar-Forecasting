@@ -1,0 +1,4 @@
+Cluster,Cluster_Name,Days_Count,Pct_Days,Mean_Daily_Total_MW,Peak_Hour,Peak_Production_MW
+0,Low Production (Winter / Overcast),1121,52.02,89105.8,13,5952.48
+1,High Production (Summer / Sunny),301,13.97,302637.13,13,15494.16
+2,Moderate Production (Transitional),733,34.01,177555.26,13,10103.89

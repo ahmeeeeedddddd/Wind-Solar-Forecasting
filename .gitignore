@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Raw Datasets (Do NOT push to GitHub - local workspace only)
+Energy Production Dataset.csv
+data/raw/Energy Production Dataset.csv
+*.csv.gz
+
+# Internal local documentation (Do NOT push to GitHub)
+PERSON_B_INTERNAL_LOG.md

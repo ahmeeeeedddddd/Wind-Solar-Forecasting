@@ -1,0 +1,4 @@
+Model_Strategy,MAE,RMSE,MASE
+Baseline Global RF (No Cluster),509.88,868.51,0.204
+Experiment (a): Separate Model per Cluster,514.25,862.63,0.2058
+Experiment (b): Cluster Label as Extra Feature,505.47,864.61,0.2023
