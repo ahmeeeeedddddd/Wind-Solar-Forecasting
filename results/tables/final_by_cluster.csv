@@ -1,0 +1,100 @@
+Group,Model,Horizon_h,Cluster,N,MAE,RMSE,MASE
+Baseline,Naive (last known value),1,0,4080,570.8,855.8,0.2285
+Baseline,Naive (last known value),1,1,2033,746.29,1162.14,0.2987
+Baseline,Naive (last known value),1,2,4222,750.71,1101.71,0.3005
+Baseline,Seasonal naive (same hour yesterday),1,0,4080,2186.65,3122.84,0.8752
+Baseline,Seasonal naive (same hour yesterday),1,1,2033,4764.94,5826.99,1.9071
+Baseline,Seasonal naive (same hour yesterday),1,2,4222,3042.84,3949.99,1.2179
+Baseline,Seasonal naive (same hour last week),1,0,4080,4230.03,5819.56,1.693
+Baseline,Seasonal naive (same hour last week),1,1,2033,6894.03,8300.89,2.7593
+Baseline,Seasonal naive (same hour last week),1,2,4222,3604.1,4640.7,1.4425
+Global,Linear Regression,1,0,4080,496.28,750.48,0.1986
+Global,Linear Regression,1,1,2033,708.19,1108.28,0.2834
+Global,Linear Regression,1,2,4222,650.28,997.75,0.2603
+Global,Ridge,1,0,4080,494.88,748.05,0.1981
+Global,Ridge,1,1,2033,714.63,1111.07,0.286
+Global,Ridge,1,2,4222,650.74,996.64,0.2605
+Global,Random Forest,1,0,4080,378.19,655.03,0.1514
+Global,Random Forest,1,1,2033,655.24,1079.96,0.2623
+Global,Random Forest,1,2,4222,552.71,926.87,0.2212
+Global,LightGBM,1,0,4080,351.09,625.87,0.1405
+Global,LightGBM,1,1,2033,679.8,1123.98,0.2721
+Global,LightGBM,1,2,4222,508.83,883.15,0.2037
+Global,LightGBM (no weather),1,0,4080,358.13,641.23,0.1433
+Global,LightGBM (no weather),1,1,2033,672.13,1114.17,0.269
+Global,LightGBM (no weather),1,2,4222,522.07,905.2,0.209
+Cluster-aware,LightGBM + per-cluster models (a),1,0,4080,351.04,600.89,0.1405
+Cluster-aware,LightGBM + per-cluster models (a),1,1,2033,668.16,1090.13,0.2674
+Cluster-aware,LightGBM + per-cluster models (a),1,2,4222,535.43,895.3,0.2143
+Cluster-aware,LightGBM + cluster feature (b),1,0,4080,341.19,612.1,0.1366
+Cluster-aware,LightGBM + cluster feature (b),1,1,2033,657.9,1109.41,0.2633
+Cluster-aware,LightGBM + cluster feature (b),1,2,4222,502.02,869.99,0.2009
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",1,0,4080,349.75,626.42,0.14
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",1,1,2033,679.66,1124.67,0.272
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",1,2,4222,507.63,881.38,0.2032
+Baseline,Naive (last known value),6,0,4080,2243.29,2971.56,0.8979
+Baseline,Naive (last known value),6,1,2033,2930.58,3744.15,1.1729
+Baseline,Naive (last known value),6,2,4222,2837.67,3681.97,1.1358
+Baseline,Seasonal naive (same hour yesterday),6,0,4080,2186.65,3122.84,0.8752
+Baseline,Seasonal naive (same hour yesterday),6,1,2033,4764.94,5826.99,1.9071
+Baseline,Seasonal naive (same hour yesterday),6,2,4222,3042.84,3949.99,1.2179
+Baseline,Seasonal naive (same hour last week),6,0,4080,4230.03,5819.56,1.693
+Baseline,Seasonal naive (same hour last week),6,1,2033,6894.97,8301.18,2.7596
+Baseline,Seasonal naive (same hour last week),6,2,4222,3604.1,4640.7,1.4425
+Global,Linear Regression,6,0,4080,1397.15,1780.81,0.5592
+Global,Linear Regression,6,1,2033,2540.62,3138.83,1.0169
+Global,Linear Regression,6,2,4222,1935.47,2422.94,0.7747
+Global,Ridge,6,0,4080,1391.85,1773.36,0.5571
+Global,Ridge,6,1,2033,2542.73,3139.68,1.0177
+Global,Ridge,6,2,4222,1931.0,2418.84,0.7729
+Global,Random Forest,6,0,4080,1175.27,1525.5,0.4704
+Global,Random Forest,6,1,2033,2488.21,3014.27,0.9959
+Global,Random Forest,6,2,4222,1828.01,2324.73,0.7316
+Global,LightGBM,6,0,4080,1184.76,1531.35,0.4742
+Global,LightGBM,6,1,2033,2420.57,2955.23,0.9688
+Global,LightGBM,6,2,4222,1786.16,2271.38,0.7149
+Global,LightGBM (no weather),6,0,4080,1335.84,1720.87,0.5347
+Global,LightGBM (no weather),6,1,2033,2600.64,3216.65,1.0409
+Global,LightGBM (no weather),6,2,4222,1867.75,2405.22,0.7475
+Cluster-aware,LightGBM + per-cluster models (a),6,0,4080,1022.18,1327.11,0.4091
+Cluster-aware,LightGBM + per-cluster models (a),6,1,2033,2158.74,2667.33,0.864
+Cluster-aware,LightGBM + per-cluster models (a),6,2,4222,1586.28,2034.58,0.6349
+Cluster-aware,LightGBM + cluster feature (b),6,0,4080,1028.75,1330.88,0.4117
+Cluster-aware,LightGBM + cluster feature (b),6,1,2033,2110.82,2617.51,0.8448
+Cluster-aware,LightGBM + cluster feature (b),6,2,4222,1578.66,2022.23,0.6318
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",6,0,4080,1175.26,1521.97,0.4704
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",6,1,2033,2432.31,2976.84,0.9735
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",6,2,4222,1781.89,2265.92,0.7132
+Baseline,Naive (last known value),24,0,4080,2186.65,3122.84,0.8752
+Baseline,Naive (last known value),24,1,2034,4763.8,5825.81,1.9067
+Baseline,Naive (last known value),24,2,4222,3042.84,3949.99,1.2179
+Baseline,Seasonal naive (same hour yesterday),24,0,4080,2186.65,3122.84,0.8752
+Baseline,Seasonal naive (same hour yesterday),24,1,2034,4763.8,5825.81,1.9067
+Baseline,Seasonal naive (same hour yesterday),24,2,4222,3042.84,3949.99,1.2179
+Baseline,Seasonal naive (same hour last week),24,0,4080,4230.03,5819.56,1.693
+Baseline,Seasonal naive (same hour last week),24,1,2034,6892.4,8299.22,2.7586
+Baseline,Seasonal naive (same hour last week),24,2,4222,3604.1,4640.7,1.4425
+Global,Linear Regression,24,0,4080,1691.34,2072.44,0.6769
+Global,Linear Regression,24,1,2034,3788.79,4549.16,1.5164
+Global,Linear Regression,24,2,4222,2157.63,2812.18,0.8636
+Global,Ridge,24,0,4080,1691.34,2072.44,0.6769
+Global,Ridge,24,1,2034,3788.79,4549.16,1.5164
+Global,Ridge,24,2,4222,2157.63,2812.18,0.8636
+Global,Random Forest,24,0,4080,1491.37,1857.54,0.5969
+Global,Random Forest,24,1,2034,3762.91,4479.57,1.5061
+Global,Random Forest,24,2,4222,2178.64,2801.87,0.872
+Global,LightGBM,24,0,4080,1479.98,1848.98,0.5923
+Global,LightGBM,24,1,2034,3709.24,4437.34,1.4846
+Global,LightGBM,24,2,4222,2130.49,2731.31,0.8527
+Global,LightGBM (no weather),24,0,4080,2313.67,2843.87,0.926
+Global,LightGBM (no weather),24,1,2034,4748.24,5680.3,1.9004
+Global,LightGBM (no weather),24,2,4222,2193.19,2824.31,0.8778
+Cluster-aware,LightGBM + per-cluster models (a),24,0,4080,1142.27,1444.47,0.4572
+Cluster-aware,LightGBM + per-cluster models (a),24,1,2034,2475.97,3034.53,0.991
+Cluster-aware,LightGBM + per-cluster models (a),24,2,4222,1801.79,2266.55,0.7212
+Cluster-aware,LightGBM + cluster feature (b),24,0,4080,1146.71,1443.74,0.459
+Cluster-aware,LightGBM + cluster feature (b),24,1,2034,2511.53,3036.42,1.0052
+Cluster-aware,LightGBM + cluster feature (b),24,2,4222,1789.46,2254.44,0.7162
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",24,0,4080,1473.77,1842.25,0.5899
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",24,1,2034,3683.57,4410.62,1.4743
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",24,2,4222,2128.9,2736.32,0.8521

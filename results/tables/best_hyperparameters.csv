@@ -1,0 +1,10 @@
+Horizon_h,Model,CV_MAE,Params
+1,Ridge,453.25,{'ridge__alpha': 100}
+1,Random Forest,379.77,"{'n_estimators': 100, 'min_samples_leaf': 5, 'max_features': 1.0, 'max_depth': 16}"
+1,LightGBM,351.7,"{'subsample': 1.0, 'num_leaves': 63, 'n_estimators': 800, 'min_child_samples': 20, 'learning_rate': 0.03, 'colsample_bytree': 1.0}"
+6,Ridge,1477.14,{'ridge__alpha': 100}
+6,Random Forest,1347.67,"{'n_estimators': 100, 'min_samples_leaf': 5, 'max_features': 0.8, 'max_depth': None}"
+6,LightGBM,1316.8,"{'subsample': 1.0, 'num_leaves': 31, 'n_estimators': 200, 'min_child_samples': 20, 'learning_rate': 0.05, 'colsample_bytree': 1.0}"
+24,Ridge,1926.46,{'ridge__alpha': 0.01}
+24,Random Forest,1840.56,"{'n_estimators': 100, 'min_samples_leaf': 20, 'max_features': 0.8, 'max_depth': 12}"
+24,LightGBM,1844.28,"{'subsample': 0.8, 'num_leaves': 31, 'n_estimators': 200, 'min_child_samples': 20, 'learning_rate': 0.03, 'colsample_bytree': 1.0}"
