@@ -1,0 +1,133 @@
+Group,Model,Horizon_h,Season,N,MAE,RMSE,MASE
+Baseline,Naive (last known value),1,Winter,2160,486.17,668.47,0.1946
+Baseline,Naive (last known value),1,Spring,2204,765.18,1172.58,0.3063
+Baseline,Naive (last known value),1,Summer,2208,827.95,1190.92,0.3314
+Baseline,Naive (last known value),1,Autumn,3763,651.31,995.78,0.2607
+Baseline,Seasonal naive (same hour yesterday),1,Winter,2160,3693.48,4985.6,1.4783
+Baseline,Seasonal naive (same hour yesterday),1,Spring,2204,2697.74,3522.76,1.0797
+Baseline,Seasonal naive (same hour yesterday),1,Summer,2208,2229.96,2975.55,0.8925
+Baseline,Seasonal naive (same hour yesterday),1,Autumn,3763,3350.53,4437.54,1.341
+Baseline,Seasonal naive (same hour last week),1,Winter,2160,7251.74,8909.34,2.9024
+Baseline,Seasonal naive (same hour last week),1,Spring,2204,3834.56,4840.84,1.5347
+Baseline,Seasonal naive (same hour last week),1,Summer,2208,2801.82,3639.98,1.1214
+Baseline,Seasonal naive (same hour last week),1,Autumn,3763,4302.17,5572.02,1.7219
+Global,Linear Regression,1,Winter,2160,478.54,632.78,0.1915
+Global,Linear Regression,1,Spring,2204,684.17,1108.01,0.2738
+Global,Linear Regression,1,Summer,2208,662.37,1015.01,0.2651
+Global,Linear Regression,1,Autumn,3763,586.23,915.31,0.2346
+Global,Ridge,1,Winter,2160,482.58,638.4,0.1931
+Global,Ridge,1,Spring,2204,683.99,1105.47,0.2738
+Global,Ridge,1,Summer,2208,659.49,1011.19,0.264
+Global,Ridge,1,Autumn,3763,588.19,915.65,0.2354
+Global,Random Forest,1,Winter,2160,411.27,567.86,0.1646
+Global,Random Forest,1,Spring,2204,589.38,1066.24,0.2359
+Global,Random Forest,1,Summer,2208,520.52,911.97,0.2083
+Global,Random Forest,1,Autumn,3763,497.47,848.66,0.1991
+Global,LightGBM,1,Winter,2160,403.39,561.48,0.1615
+Global,LightGBM,1,Spring,2204,563.05,1044.7,0.2254
+Global,LightGBM,1,Summer,2208,486.56,882.01,0.1947
+Global,LightGBM,1,Autumn,3763,472.01,840.03,0.1889
+Global,LightGBM (no weather),1,Winter,2160,406.28,561.34,0.1626
+Global,LightGBM (no weather),1,Spring,2204,578.22,1060.5,0.2314
+Global,LightGBM (no weather),1,Summer,2208,490.33,904.8,0.1962
+Global,LightGBM (no weather),1,Autumn,3763,477.59,846.08,0.1912
+Cluster-aware,LightGBM + per-cluster models (a),1,Winter,2160,391.95,540.65,0.1569
+Cluster-aware,LightGBM + per-cluster models (a),1,Spring,2204,572.53,1026.81,0.2291
+Cluster-aware,LightGBM + per-cluster models (a),1,Summer,2208,510.05,879.98,0.2041
+Cluster-aware,LightGBM + per-cluster models (a),1,Autumn,3763,482.75,832.57,0.1932
+Cluster-aware,LightGBM + cluster feature (b),1,Winter,2160,383.74,541.61,0.1536
+Cluster-aware,LightGBM + cluster feature (b),1,Spring,2204,550.63,1026.92,0.2204
+Cluster-aware,LightGBM + cluster feature (b),1,Summer,2208,485.44,874.05,0.1943
+Cluster-aware,LightGBM + cluster feature (b),1,Autumn,3763,461.01,828.31,0.1845
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",1,Winter,2160,401.55,559.65,0.1607
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",1,Spring,2204,558.73,1037.51,0.2236
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",1,Summer,2208,487.6,888.61,0.1952
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",1,Autumn,3763,472.11,840.73,0.189
+Baseline,Naive (last known value),6,Winter,2160,2094.45,2761.46,0.8383
+Baseline,Naive (last known value),6,Spring,2204,2481.42,3244.0,0.9932
+Baseline,Naive (last known value),6,Summer,2208,3290.94,4220.03,1.3172
+Baseline,Naive (last known value),6,Autumn,3763,2612.72,3371.63,1.0457
+Baseline,Seasonal naive (same hour yesterday),6,Winter,2160,3693.48,4985.6,1.4783
+Baseline,Seasonal naive (same hour yesterday),6,Spring,2204,2697.74,3522.76,1.0797
+Baseline,Seasonal naive (same hour yesterday),6,Summer,2208,2229.96,2975.55,0.8925
+Baseline,Seasonal naive (same hour yesterday),6,Autumn,3763,3350.53,4437.54,1.341
+Baseline,Seasonal naive (same hour last week),6,Winter,2160,7251.74,8909.34,2.9024
+Baseline,Seasonal naive (same hour last week),6,Spring,2204,3835.42,4841.31,1.5351
+Baseline,Seasonal naive (same hour last week),6,Summer,2208,2801.82,3639.98,1.1214
+Baseline,Seasonal naive (same hour last week),6,Autumn,3763,4302.17,5572.02,1.7219
+Global,Linear Regression,6,Winter,2160,1793.2,2399.16,0.7177
+Global,Linear Regression,6,Spring,2204,1840.88,2328.38,0.7368
+Global,Linear Regression,6,Summer,2208,1824.23,2255.96,0.7301
+Global,Linear Regression,6,Autumn,3763,1881.07,2425.37,0.7529
+Global,Ridge,6,Winter,2160,1796.88,2404.88,0.7192
+Global,Ridge,6,Spring,2204,1834.98,2319.78,0.7344
+Global,Ridge,6,Summer,2208,1811.13,2243.27,0.7249
+Global,Ridge,6,Autumn,3763,1880.49,2423.93,0.7526
+Global,Random Forest,6,Winter,2160,1698.8,2269.59,0.6799
+Global,Random Forest,6,Spring,2204,1771.46,2277.77,0.709
+Global,Random Forest,6,Summer,2208,1565.06,1980.53,0.6264
+Global,Random Forest,6,Autumn,3763,1738.54,2279.99,0.6958
+Global,LightGBM,6,Winter,2160,1670.17,2198.44,0.6685
+Global,LightGBM,6,Spring,2204,1771.43,2273.3,0.709
+Global,LightGBM,6,Summer,2208,1542.87,1952.75,0.6175
+Global,LightGBM,6,Autumn,3763,1694.8,2238.47,0.6783
+Global,LightGBM (no weather),6,Winter,2160,1843.22,2421.47,0.7377
+Global,LightGBM (no weather),6,Spring,2204,1811.55,2367.74,0.7251
+Global,LightGBM (no weather),6,Summer,2208,1712.08,2180.3,0.6852
+Global,LightGBM (no weather),6,Autumn,3763,1825.32,2419.3,0.7306
+Cluster-aware,LightGBM + per-cluster models (a),6,Winter,2160,1457.16,1959.61,0.5832
+Cluster-aware,LightGBM + per-cluster models (a),6,Spring,2204,1539.12,1984.06,0.616
+Cluster-aware,LightGBM + per-cluster models (a),6,Summer,2208,1375.05,1745.56,0.5504
+Cluster-aware,LightGBM + per-cluster models (a),6,Autumn,3763,1509.61,2024.86,0.6042
+Cluster-aware,LightGBM + cluster feature (b),6,Winter,2160,1458.71,1947.56,0.5838
+Cluster-aware,LightGBM + cluster feature (b),6,Spring,2204,1516.21,1967.12,0.6068
+Cluster-aware,LightGBM + cluster feature (b),6,Summer,2208,1375.42,1738.14,0.5505
+Cluster-aware,LightGBM + cluster feature (b),6,Autumn,3763,1494.62,1998.48,0.5982
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",6,Winter,2160,1670.22,2203.84,0.6685
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",6,Spring,2204,1769.76,2274.67,0.7083
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",6,Summer,2208,1540.57,1952.95,0.6166
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",6,Autumn,3763,1688.36,2236.82,0.6757
+Baseline,Naive (last known value),24,Winter,2160,3693.48,4985.6,1.4783
+Baseline,Naive (last known value),24,Spring,2205,2697.63,3522.35,1.0797
+Baseline,Naive (last known value),24,Summer,2208,2229.96,2975.55,0.8925
+Baseline,Naive (last known value),24,Autumn,3763,3350.53,4437.54,1.341
+Baseline,Seasonal naive (same hour yesterday),24,Winter,2160,3693.48,4985.6,1.4783
+Baseline,Seasonal naive (same hour yesterday),24,Spring,2205,2697.63,3522.35,1.0797
+Baseline,Seasonal naive (same hour yesterday),24,Summer,2208,2229.96,2975.55,0.8925
+Baseline,Seasonal naive (same hour yesterday),24,Autumn,3763,3350.53,4437.54,1.341
+Baseline,Seasonal naive (same hour last week),24,Winter,2160,7251.74,8909.34,2.9024
+Baseline,Seasonal naive (same hour last week),24,Spring,2205,3834.44,4840.35,1.5347
+Baseline,Seasonal naive (same hour last week),24,Summer,2208,2801.82,3639.98,1.1214
+Baseline,Seasonal naive (same hour last week),24,Autumn,3763,4302.17,5572.02,1.7219
+Global,Linear Regression,24,Winter,2160,2856.1,3716.3,1.1431
+Global,Linear Regression,24,Spring,2205,2111.24,2732.74,0.845
+Global,Linear Regression,24,Summer,2208,1743.49,2189.55,0.6978
+Global,Linear Regression,24,Autumn,3763,2403.01,3098.28,0.9618
+Global,Ridge,24,Winter,2160,2856.1,3716.3,1.1431
+Global,Ridge,24,Spring,2205,2111.24,2732.74,0.845
+Global,Ridge,24,Summer,2208,1743.49,2189.55,0.6978
+Global,Ridge,24,Autumn,3763,2403.01,3098.28,0.9618
+Global,Random Forest,24,Winter,2160,2706.94,3525.02,1.0834
+Global,Random Forest,24,Spring,2205,2122.28,2789.36,0.8494
+Global,Random Forest,24,Summer,2208,1651.84,2113.59,0.6611
+Global,Random Forest,24,Autumn,3763,2328.69,3013.76,0.932
+Global,LightGBM,24,Winter,2160,2620.55,3437.98,1.0488
+Global,LightGBM,24,Spring,2205,2081.66,2730.56,0.8332
+Global,LightGBM,24,Summer,2208,1642.94,2102.99,0.6576
+Global,LightGBM,24,Autumn,3763,2311.94,2995.18,0.9253
+Global,LightGBM (no weather),24,Winter,2160,3673.94,4563.73,1.4705
+Global,LightGBM (no weather),24,Spring,2205,2331.7,3011.17,0.9332
+Global,LightGBM (no weather),24,Summer,2208,1926.61,2551.89,0.7711
+Global,LightGBM (no weather),24,Autumn,3763,2930.18,3750.96,1.1728
+Cluster-aware,LightGBM + per-cluster models (a),24,Winter,2160,1871.01,2441.48,0.7489
+Cluster-aware,LightGBM + per-cluster models (a),24,Spring,2205,1721.62,2167.52,0.6891
+Cluster-aware,LightGBM + per-cluster models (a),24,Summer,2208,1438.77,1807.96,0.5759
+Cluster-aware,LightGBM + per-cluster models (a),24,Autumn,3763,1671.38,2216.08,0.669
+Cluster-aware,LightGBM + cluster feature (b),24,Winter,2160,1895.04,2453.23,0.7585
+Cluster-aware,LightGBM + cluster feature (b),24,Spring,2205,1690.77,2124.26,0.6767
+Cluster-aware,LightGBM + cluster feature (b),24,Summer,2208,1447.04,1814.47,0.5792
+Cluster-aware,LightGBM + cluster feature (b),24,Autumn,3763,1681.01,2217.07,0.6728
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",24,Winter,2160,2600.68,3426.37,1.0409
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",24,Spring,2205,2075.09,2730.95,0.8305
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",24,Summer,2208,1638.04,2095.45,0.6556
+Cluster-aware,"LightGBM + cluster feature (b, leak-free)",24,Autumn,3763,2307.67,2984.99,0.9236
