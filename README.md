@@ -71,11 +71,18 @@ To construct daily profile matrices, perform diagnostic cluster selection, fit K
 python src/clustering.py
 ```
 
-### 4. Explore Notebooks
-Open Jupyter and run:
-- `notebooks/01_eda.ipynb` for full exploratory analysis and data visualizations.
-- `notebooks/02_weather_and_features.ipynb` for feature correlation and lag analysis.
-- `notebooks/03_clustering.ipynb` for unsupervised profile clustering and cluster-aware forecasting experiments.
+### 4. Run Classical Time-Series Diagnostics & ARIMA Models
+To run ADF & KPSS stationarity tests, plot ACF/PACF graphs, fit candidate ARIMA models, and run residual error diagnostics:
+```bash
+python src/arima_and_diagnostics.py
+```
+
+### 5. Run Supervised Models & Baselines (Person C)
+To compute Naive/Seasonal Naive baselines and train global ML vs. cluster-aware models:
+```bash
+python src/baselines.py
+python src/models.py --quick
+```
 
 ---
 
