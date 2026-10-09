@@ -23,7 +23,12 @@ from statsmodels.tsa.arima.model import ARIMA
 
 from baselines import load_splits, regular_hourly_series, HORIZONS, TARGET
 from evaluation import evaluate, mase_scale
-from plotting import apply_style, savefig
+def apply_style():
+    plt.style.use("seaborn-v0_8-darkgrid")
+
+def savefig(path: str, **kwargs):
+    plt.savefig(path, bbox_inches="tight", dpi=150, **kwargs)
+    print(f"Saved -> {path}")
 
 warnings.filterwarnings("ignore")
 
