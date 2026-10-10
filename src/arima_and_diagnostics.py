@@ -4,11 +4,19 @@ arima_and_diagnostics.py - Time-Series Statistical Analysis & ARIMA Models
 Includes missing time-series diagnostics from the lecture notebook:
   1. Stationarity Analysis (ADF & KPSS hypothesis tests)
   2. ACF & PACF plots for raw and differenced series
-  3. Classical Statistical ARIMA forecasting (ARIMA(1,0,0), ARIMA(1,1,0), ARIMA(0,1,1), ARIMA(1,1,1))
+  3. Classical Statistical ARIMA forecasting (ARIMA(1,0,0), ARIMA(1,1,0), ARIMA(0,1,1), ARIMA(1,1,1), ARIMA(2,1,1))
   4. Residual diagnostics (Residual time series & Residual ACF plots)
 
 Run from repo root:
     python src/arima_and_diagnostics.py
+
+FIX (v2): in v1 the ARIMA models were fitted but the forecasts that were evaluated were
+`full_series.shift(h)` (= the naive baseline), so every ARIMA row had identical MAE/RMSE/MASE.
+Now each ARIMA model produces its OWN forecasts: parameters are fitted once on the last 4,000
+training hours, then for forecast origins spread through the test period (every `stride` hours)
+the fitted parameters are applied to the most recent `window` hours (no re-fitting, no future
+data) and h-step-ahead forecasts are taken. Naive is evaluated on exactly the same origins so
+the comparison is fair.
 """
 
 import os
@@ -35,6 +43,7 @@ warnings.filterwarnings("ignore")
 BASE_DIR   = os.path.join(os.path.dirname(__file__), "..")
 TABLES_DIR = os.path.join(BASE_DIR, "results", "tables")
 FIGS_DIR   = os.path.join(BASE_DIR, "results", "figures")
+PRED_DIR   = os.path.join(BASE_DIR, "results", "predictions")
 
 
 # --------------------------------------------------------------------------- 1. Stationarity Tests
@@ -108,54 +117,79 @@ def plot_acf_pacf_analysis(series: pd.Series):
 
 
 # --------------------------------------------------------------------------- 3. Classical ARIMA Models
-def run_arima_models(full_series: pd.Series, train_end_idx, test_idx, scale: float) -> pd.DataFrame:
-    """Fit candidate ARIMA models and evaluate out-of-sample forecast metrics across horizons."""
+ORDERS = {
+    "ARIMA(1,0,0)": (1, 0, 0),
+    "ARIMA(1,1,0)": (1, 1, 0),
+    "ARIMA(0,1,1)": (0, 1, 1),
+    "ARIMA(1,1,1)": (1, 1, 1),
+    "ARIMA(2,1,1)": (2, 1, 1),
+}
+
+
+def run_arima_models(full_series: pd.Series, train_end_idx, test_idx, scale: float,
+                     stride: int = 6, window: int = 336):
+    """
+    Fit candidate ARIMA models and evaluate their REAL h-step-ahead forecasts on the test period.
+
+    full_series : regular hourly Production series (gaps = NaN)
+    stride      : forecast origins are every `stride` hours inside the test period
+    window      : number of most recent hours the fitted model is applied to at each origin
+    """
     print("--- 2. Fitting Classical ARIMA Models ---")
-    
-    orders = {
-        "ARIMA(1,0,0)": (1, 0, 0),
-        "ARIMA(1,1,0)": (1, 1, 0),
-        "ARIMA(0,1,1)": (0, 1, 1),
-        "ARIMA(1,1,1)": (1, 1, 1),
-        "ARIMA(2,1,1)": (2, 1, 1),
-    }
-    
-    train_series = full_series.loc[:train_end_idx].dropna()
-    # For computational efficiency on 40,000+ hourly readings, fit on recent 4,000 hours (~6 months)
-    recent_train = train_series.iloc[-4000:]
-    
+    max_h = max(HORIZONS)
+
+    # For computational efficiency on 40,000+ hourly readings, fit on the recent 4,000 training hours (~6 months)
+    recent_train = full_series.loc[:train_end_idx].iloc[-4000:]
+
+    # forecast origins: the last observed hour is `t0`; we forecast t0+1h ... t0+24h
+    last_origin = full_series.index[-1] - pd.Timedelta(hours=max_h)
+    origins = [t for t in test_idx[::stride] if t <= last_origin]
+    print(f"  {len(origins)} forecast origins in the test period (every {stride}h)")
+
+    # ---- naive baseline on exactly the same origins (the fair reference)
     rows = []
-    arima_preds = {}
-    
-    for name, order in orders.items():
+    for h in HORIZONS:
+        tgt = pd.DatetimeIndex(origins) + pd.Timedelta(hours=h)
+        y_true = full_series.reindex(tgt).values
+        naive = full_series.reindex(origins).values
+        res = evaluate(y_true, naive, scale)
+        res.update({"Model": "Naive (same origins)", "Horizon_h": h, "AIC": np.nan})
+        rows.append(res)
+
+    fits = {}
+    for name, order in ORDERS.items():
         try:
-            model = ARIMA(recent_train, order=order)
-            fit = model.fit()
+            fit = ARIMA(recent_train, order=order).fit()
+            fits[name] = fit
             aic = round(fit.aic, 1)
-            
+
+            preds = {h: [] for h in HORIZONS}
+            for t0 in origins:
+                hist = full_series.loc[t0 - pd.Timedelta(hours=window - 1): t0]
+                fc = fit.apply(hist, refit=False).forecast(steps=max_h).values
+                for h in HORIZONS:
+                    preds[h].append(fc[h - 1])
+
             for h in HORIZONS:
-                # Direct forecast at horizon h (shift forecast origin)
-                fc = fit.forecast(steps=h).iloc[-1]
-                # Shifted out-of-sample forecast series over test set
-                pred_series = full_series.shift(h).reindex(test_idx)
-                
-                res = evaluate(full_series.reindex(test_idx), pred_series, scale)
-                res.update({"Model": f"{name}", "Horizon_h": h, "AIC": aic})
+                tgt = pd.DatetimeIndex(origins) + pd.Timedelta(hours=h)
+                res = evaluate(full_series.reindex(tgt).values, np.array(preds[h]), scale)
+                res.update({"Model": name, "Horizon_h": h, "AIC": aic})
                 rows.append(res)
-                
-                if h == 1:
-                    arima_preds[name] = pred_series
             print(f"  [OK] {name} fitted | AIC: {aic}")
         except Exception as e:
             print(f"  [Failed] {name}: {e}")
-            
+
     df_arima = pd.DataFrame(rows)
     df_arima.to_csv(os.path.join(TABLES_DIR, "arima_results.csv"), index=False)
-    return df_arima, arima_preds
+
+    show = df_arima.round({"MAE": 1, "RMSE": 1, "MASE": 4})
+    print(show.to_string(index=False))
+    return df_arima, fits
 
 
 # --------------------------------------------------------------------------- 4. Residual Diagnostics
-def plot_residual_diagnostics(y_true: pd.Series, y_pred: pd.Series, model_name: str = "Best Model"):
+def plot_residual_diagnostics(y_true: pd.Series, y_pred: pd.Series, model_name: str = "Best Model",
+                              filename: str = "05_residual_diagnostics.png"):
     """Generate diagnostic plots for model forecast errors (residuals)."""
     apply_style()
     residuals = (y_true - y_pred).dropna()
@@ -175,9 +209,9 @@ def plot_residual_diagnostics(y_true: pd.Series, y_pred: pd.Series, model_name: 
     axes[1].grid(alpha=0.3)
     
     plt.tight_layout()
-    savefig(os.path.join(FIGS_DIR, "05_residual_diagnostics.png"))
+    savefig(os.path.join(FIGS_DIR, filename))
     plt.close()
-    print("Saved Residual Diagnostics plot -> results/figures/05_residual_diagnostics.png")
+    print(f"Saved Residual Diagnostics plot -> results/figures/{filename}")
 
 
 # --------------------------------------------------------------------------- Pipeline Runner
@@ -195,13 +229,33 @@ def run_full_diagnostics():
     # 2. ACF / PACF Plots
     plot_acf_pacf_analysis(full.loc[:train.index.max()])
     
-    # 3. ARIMA Models
-    df_arima, arima_preds = run_arima_models(full, train.index.max(), test.index, scale)
+    # 3. ARIMA Models (real ARIMA forecasts, evaluated against naive on the same origins)
+    df_arima, fits = run_arima_models(full, train.index.max(), test.index, scale)
     
     # 4. Residual Diagnostics
     y_test = full.reindex(test.index)
+
+    # 4a. best ARIMA model at h=1 (one-step-ahead forecasts with the fitted parameters)
+    arima_rows = df_arima[(df_arima.Horizon_h == 1) & (df_arima.Model.isin(fits.keys()))]
+    if len(arima_rows):
+        best_name = arima_rows.sort_values("MAE").iloc[0]["Model"]
+        seg = full.loc[test.index.min() - pd.Timedelta(hours=336): test.index.max()]
+        one_step = fits[best_name].apply(seg, refit=False).fittedvalues.reindex(test.index)
+        plot_residual_diagnostics(y_test, one_step, model_name=f"{best_name} (h=1)",
+                                  filename="05_residual_diagnostics.png")
+
+    # 4b. naive baseline (for comparison)
     naive_pred = full.shift(1).reindex(test.index)
-    plot_residual_diagnostics(y_test, naive_pred, model_name="Naive Baseline (h=1)")
+    plot_residual_diagnostics(y_test, naive_pred, model_name="Naive Baseline (h=1)",
+                              filename="05b_residual_diagnostics_naive.png")
+
+    # 4c. best supervised model (LightGBM) if models.py was already run
+    p1 = os.path.join(PRED_DIR, "predictions_h1.csv")
+    if os.path.exists(p1):
+        pr = pd.read_csv(p1, index_col=0, parse_dates=True)
+        if "LightGBM" in pr.columns:
+            plot_residual_diagnostics(pr["y_true"], pr["LightGBM"], model_name="LightGBM (h=1)",
+                                      filename="06_residual_diagnostics_lightgbm.png")
     
     print("\n=== All Time-Series Lecture Diagnostics Completed Successfully! ===")
 
